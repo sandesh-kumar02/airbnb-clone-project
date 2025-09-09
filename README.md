@@ -7,3 +7,8 @@ I’m sharing my daily progress here and on LinkedIn.
 
 - **Day 1** – Project setup (base structure, Node.js + Express setup, GitHub initialized)  
 - (and so on...)
+ 
+
+## 📅 Progress 
+- **Day 2** – Added listing functionality and saved listings to the database  
+(and so on...)
