@@ -1,21 +1,26 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  titlt: {
+  title: {
     type: String,
   },
   description: {
     type: String,
   },
   image: {
-    type: String,
-    set: (v) => {
-      return v === ""
-        ? "https://www.istockphoto.com/photo/woman-exploring-on-tea-plantation-in-sri-lanka-gm2183673991-602547445?searchscope=image%2Cfilm"
-        : v;
+    filename: {
+      type: String,
+      default: "listingimage",
     },
-    default:
-      "https://www.istockphoto.com/photo/view-of-historic-building-against-clear-sky-gm2171677871-591487123?searchscope=image%2Cfilm",
+    url: {
+      type: String,
+      default:
+        "https://www.istockphoto.com/photo/view-of-historic-building-against-clear-sky-gm2171677871-591487123?searchscope=image%2Cfilm",
+      set: (v) =>
+        v === ""
+          ? "https://www.istockphoto.com/photo/woman-exploring-on-tea-plantation-in-sri-lanka-gm2183673991-602547445?searchscope=image%2Cfilm"
+          : v,
+    },
   },
   price: {
     type: Number,

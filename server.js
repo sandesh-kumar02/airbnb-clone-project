@@ -1,23 +1,28 @@
 import express from "express";
 import mongoose from "mongoose";
+import path from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import methodOverride from 'method-override';
 const app = express();
-
 // importing file
-import Listing from "./models/listings.js";
+import listingController from "./controllers/listingController.js";
+import listingRoutes from "./Routes/listingRoutes.js";
 
-// app.get("/", async (req, res) => {
-//   const newListing = new Listing({
-//     titlt: "this is first listing",
-//     description: "this is listing description",
-//     price: 18000,
-//     location: "Goa",
-//     country: "India",
-//   });
-//   await newListing.save();
-//   console.log("listing saved");
-//   res.send("successfully saved");
-// });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(methodOverride('_method'));
+
+// calling the importing file
+
+app.use("/", listingController);
+app.use("/", listingRoutes);
+// end
 async function connectDB() {
   await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust-Project");
 }

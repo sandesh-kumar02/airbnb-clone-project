@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Add new LIstining</h1>
+    <form action="/listings" method="POST">
+      <input
+        type="text"
+        name="title"
+        placeholder="enter your title"
+        autofocus
+        required
+      />
+      <textarea
+        name="description"
+        placeholder="enter your description"
+        required
+      ></textarea>
+      <input
+        type="number"
+        name="price"
+        placeholder="enter your price"
+        autofocus
+        required
+      />
+      <input
+        type="tsex"
+        name="location"
+        placeholder="ener your location"
+        required
+        autofocus
+      />
+      <input
+        type="text"
+        name="country"
+        placeholder="enter your country name"
+        ,
+        required
+        autofocus
+      />
+      <button>Submit</button>
+    </form>
+  </body>
+</html>
