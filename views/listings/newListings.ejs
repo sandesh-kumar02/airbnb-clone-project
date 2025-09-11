@@ -1,48 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Add new LIstining</h1>
-    <form action="/listings" method="POST">
-      <input
-        type="text"
-        name="title"
-        placeholder="enter your title"
-        autofocus
-        required
-      />
-      <textarea
-        name="description"
-        placeholder="enter your description"
-        required
-      ></textarea>
-      <input
-        type="number"
-        name="price"
-        placeholder="enter your price"
-        autofocus
-        required
-      />
-      <input
-        type="tsex"
-        name="location"
-        placeholder="ener your location"
-        required
-        autofocus
-      />
-      <input
-        type="text"
-        name="country"
-        placeholder="enter your country name"
-        ,
-        required
-        autofocus
-      />
-      <button>Submit</button>
+<% layout('/layouts/boilerplate.ejs') %>
+<body class="add-listing-page">
+  <div class="container py-5">
+    <h1 class="text-center mb-5 form-title">✨ Add New Listing</h1>
+    <form action="/listings" method="POST" class="needs-validation" novalidate>
+      
+      <!-- Title -->
+      <div class="mb-4">
+        <label for="title" class="form-label fw-bold">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          class="form-control form-control-lg"
+          placeholder="Enter your title"
+          required
+        />
+        <div class="invalid-feedback">⚠️ Please enter a title.</div>
+        <div class="valid-feedback">✅ Looks good!</div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-4">
+        <label for="description" class="form-label fw-bold">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          class="form-control form-control-lg"
+          rows="3"
+          placeholder="Enter your description"
+          required
+        ></textarea>
+        <div class="invalid-feedback">⚠️ Please enter a description.</div>
+        <div class="valid-feedback">✅ Perfect!</div>
+      </div>
+
+      <!-- Price -->
+      <div class="mb-4">
+        <label for="price" class="form-label fw-bold">Price</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          class="form-control form-control-lg"
+          placeholder="Enter your price"
+          required
+        />
+        <div class="invalid-feedback">⚠️ Please enter a valid price.</div>
+        <div class="valid-feedback">✅ Looks fine!</div>
+      </div>
+
+      <!-- Location -->
+      <div class="mb-4">
+        <label for="location" class="form-label fw-bold">Location</label>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          class="form-control form-control-lg"
+          placeholder="Enter your location"
+          required
+        />
+        <div class="invalid-feedback">⚠️ Location is required.</div>
+        <div class="valid-feedback">✅ Nice!</div>
+      </div>
+
+      <!-- Country -->
+      <div class="mb-4">
+        <label for="country" class="form-label fw-bold">Country</label>
+        <input
+          type="text"
+          id="country"
+          name="country"
+          class="form-control form-control-lg"
+          placeholder="Enter your country"
+          required
+        />
+        <div class="invalid-feedback">⚠️ Country is required.</div>
+        <div class="valid-feedback">✅ Good!</div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-grid">
+        <button class="btn btn-dark btn-lg rounded-3">Submit</button>
+      </div>
     </form>
-  </body>
-</html>
+  </div>

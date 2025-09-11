@@ -1,27 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>show routes</title>
-  </head>
-  <body>
-    <h1>Listing Details</h1>
-    <ul>
-      <li><%= showListing.title %></li>
-      <li><%= showListing.description %></li>
-      <li>&#8377; <%= showListing.price.toLocaleString("en-IN") %></li>
-      <li><%= showListing.location %></li>
-      <li><%=showListing.country %></li>
-    </ul>
-    <div>
-      <a href="/listings/<%= showListing._id %>/edit">Edit this listings</a>
-      <form
-        action="/listings/<%= showListing._id %>?_method=DELETE"
-        method="POST"
-      >
-        <button>Delete this Listing</button>
-      </form>
+<% layout('layouts/boilerplate') %>
+<% title = 'Listing Details' %>
+<% bodyClass = 'show-listing-page' %>
+
+<div class="container py-5">
+  <div class="mx-auto" style="max-width:720px;">
+    <!-- Card -->
+    <div class="card shadow-lg rounded-4">
+      <!-- Image -->
+      <img src="<%= showListing.image.url %>" class="card-img-top" alt="listing image">
+
+      <!-- Card body -->
+      <div class="card-body">
+        <h3 class="card-title mb-3"><%= showListing.title %></h3>
+        <p class="card-text text-muted"><%= showListing.description %></p>
+        <p class="card-text fw-bold">&#8377; <%= showListing.price.toLocaleString('en-IN') %> / night</p>
+        <p class="card-text"><i class="fa-solid fa-location-dot"></i> <%= showListing.location %>, <%= showListing.country %></p>
+      </div>
+
+      <!-- Card footer -->
+      <div class="card-footer d-flex justify-content-between">
+        <a href="/listings/<%= showListing._id %>/edit" class="btn btn-warning">✏️ Edit</a>
+        <form action="/listings/<%= showListing._id %>?_method=DELETE" method="POST">
+          <button class="btn btn-danger">🗑 Delete</button>
+        </form>
+      </div>
     </div>
-  </body>
-</html>
+  </div>
+</div>

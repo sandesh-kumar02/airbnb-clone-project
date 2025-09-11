@@ -10,7 +10,6 @@ export const allListings = async (req, res) => {
 export const showListings = async (req, res) => {
   const { id } = req.params;
   let showListing = await Listing.findById(id);
-  console.log(showListing);
   res.render("listings/show.ejs", { showListing });
 };
 
@@ -23,12 +22,11 @@ export const AddListing = async (req, res) => {
   const newListings = new Listing({
     title: title,
     description: description,
-    price: price,
+    price:Number(price),
     country: country,
     location: location,
   });
   let result = await newListings.save();
-  console.log(result);
   res.redirect("/listings");
 };
 
@@ -53,13 +51,11 @@ export const updateListing = async (req, res) => {
     { new: true }
   );
   res.redirect(`/listings/${id}`);
-  console.log(result);
 };
 
 export const deleteListing = async (req, res)=>{
     const {id} = req.params;
     const result = await Listing.findByIdAndDelete(id, {new : true});
-    console.log(result)
     res.redirect(`/listings`);
 }
 export default router;
