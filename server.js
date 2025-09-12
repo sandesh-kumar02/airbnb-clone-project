@@ -9,6 +9,7 @@ const app = express();
 // importing file
 import listingController from "./controllers/listingController.js";
 import listingRoutes from "./Routes/listingRoutes.js";
+import { ExpressError } from "./utils/ExpressError.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,6 +27,23 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", listingController);
 app.use("/", listingRoutes);
 // end
+
+// Agar koi bhi route match nahi hua
+app.all(/.*/, (req, res, next) => {
+  next(new ExpressError(404, "Page Not Found"));
+});
+
+// app.use((err, req, res, next) => {
+//   const { statusCode = 500, message = "Oh no, something went wrong!" } = err;
+//   res.status(statusCode).render('error.ejs', {message})
+//   // res.status(statusCode).send(message);
+// });
+
+app.use((err, req, res, next) => {
+  const { statusCode = 500, message = "Oh no, something went wrong!" } = err;
+  res.status(statusCode).render("error.ejs", { statusCode, message });
+});
+
 async function connectDB() {
   await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust-Project");
 }

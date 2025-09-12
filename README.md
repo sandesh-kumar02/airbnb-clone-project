@@ -17,3 +17,7 @@ I’m sharing my daily progress here and on LinkedIn.
 
 - **Day 3** – Implemented CRUD operations for listings (Create, Read, Update, Delete)  
   (and so on...)
+
+## 📅 Progress
+- **Day 5** – Added centralized error handling and Joi validation  
+(and so on...)

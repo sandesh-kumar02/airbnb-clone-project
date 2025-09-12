@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const listingSchema = new mongoose.Schema({
   title: {
     type: String,
   },
@@ -35,6 +35,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const Listing = mongoose.model("Listing", userSchema);
+const Listing = mongoose.model("Listing", listingSchema);
 
 export default Listing;
