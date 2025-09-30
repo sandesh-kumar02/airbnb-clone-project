@@ -1,6 +1,5 @@
-import mongoose from "mongoose";
-
-const userSchema = new mongoose.Schema({
+import mongoose, { Schema } from "mongoose";
+const listingSchema = new mongoose.Schema({
   title: {
     type: String,
   },
@@ -24,6 +23,8 @@ const userSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
+    required: true,
+    min: 0,
   },
   location: {
     type: String,
@@ -31,8 +32,14 @@ const userSchema = new mongoose.Schema({
   country: {
     type: String,
   },
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
-const Listing = mongoose.model("Listing", userSchema);
+const Listing = mongoose.model("Listing", listingSchema);
 
 export default Listing;

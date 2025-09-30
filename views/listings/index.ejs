@@ -1,19 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Listings Show</title>
-  </head>
-  <body>
-    <h1>All LIstning</h1>
-    <form action="/listing/new" method="get">
-      <button>create new listings</button>
-    </form>
-    <ul>
-      <% for (const listing of alllistings) {%>
-      <li><a href="/listings/<%= listing._id %>"><%= listing.title %></a></li>
+<% layout('/layouts/boilerplate.ejs') %>
+<body class="listings-page">
+  <div class="container py-5">
+    <h1 class="text-center mb-5 fw-bold text-dark">🌍 Explore All Listings</h1>
+    <div class="row g-4">
+      <% for (const listing of alllistings) { %>
+      <div class="col-md-4 col-sm-6">
+        <a href="/listings/<%= listing._id %>" class="text-decoration-none">
+          <div class="card listing-card shadow-sm">
+            <div class="card-img-wrapper">
+              <img
+                src="<%= listing.image.url %>"
+                class="card-img-top"
+                alt="listing-image"
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-dark"><%= listing.title %></h5>
+              <p class="card-text text-muted">
+                &#8377; <%= listing.price %> / night
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
       <% } %>
-    </ul>
-  </body>
-</html>
+    </div>
+  </div>
+</body>
+
