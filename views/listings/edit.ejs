@@ -1,51 +1,88 @@
-<% layout('layouts/boilerplate') %>
-<% title = 'Edit Listing' %>
-<% bodyClass = 'edit-listing-page' %>
+<% layout('layouts/boilerplate') %> <% title = 'Edit Listing' %> <% bodyClass =
+'edit-listing-page' %>
 
 <div class="container py-5">
-  <div class="mx-auto" style="max-width:720px;">
+  <div class="mx-auto" style="max-width: 720px">
     <h1 class="display-6 text-center mb-4">✏️ Edit Listing</h1>
 
-    <form action="/listings/<%= listings._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+    <form
+      action="/listings/<%= listings._id %>?_method=PUT"
+      method="POST"
+      class="needs-validation"
+      novalidate
+    >
       <!-- Title -->
       <div class="mb-3">
         <label class="form-label fw-semibold">Title</label>
-        <input type="text" name="title" class="form-control form-control-lg" value="<%= listings.title %>" required>
+        <input
+          type="text"
+          name="listing[title]"
+          class="form-control form-control-lg"
+          value="<%= listings.title %>"
+          required
+        />
         <div class="invalid-feedback">⚠️ Title is required.</div>
       </div>
 
       <!-- Description -->
       <div class="mb-3">
         <label class="form-label fw-semibold">Description</label>
-        <textarea name="description" class="form-control" rows="4" required><%= listings.description %></textarea>
+        <textarea
+          name="listing[description]"
+          class="form-control"
+          rows="4"
+          required
+        >
+<%= listings.description %></textarea
+        >
         <div class="invalid-feedback">⚠️ Description is required.</div>
       </div>
 
       <!-- Price -->
       <div class="mb-3">
         <label class="form-label fw-semibold">Price</label>
-        <input type="number" name="price" class="form-control" value="<%= listings.price %>" min="0" required>
+        <input
+          type="number"
+          name="listing[price]"
+          class="form-control"
+          value="<%= listings.price %>"
+          min="0"
+          required
+        />
         <div class="invalid-feedback">⚠️ Enter a valid price.</div>
       </div>
 
       <!-- Location -->
       <div class="mb-3">
         <label class="form-label fw-semibold">Location</label>
-        <input type="text" name="location" class="form-control" value="<%= listings.location %>" required>
+        <input
+          type="text"
+          name="listing[location]"
+          class="form-control"
+          value="<%= listings.location %>"
+          required
+        />
         <div class="invalid-feedback">⚠️ Location is required.</div>
       </div>
 
       <!-- Country -->
       <div class="mb-4">
         <label class="form-label fw-semibold">Country</label>
-        <input type="text" name="country" class="form-control" value="<%= listings.country %>" required>
+        <input
+          type="text"
+          name="listing[country]"
+          class="form-control"
+          value="<%= listings.country %>"
+          required
+        />
         <div class="invalid-feedback">⚠️ Country is required.</div>
       </div>
 
       <div class="d-grid">
-        <button class="btn btn-primary btn-lg rounded-3">💾 Update Listing</button>
+        <button class="btn btn-primary btn-lg rounded-3">
+          💾 Update Listing
+        </button>
       </div>
     </form>
   </div>
 </div>
-

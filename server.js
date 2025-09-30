@@ -5,6 +5,11 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import engine from "ejs-mate";
 import methodOverride from "method-override";
+import session from "express-session";
+import { configDotenv } from "dotenv";
+import connectFlash from "connect-flash";
+
+configDotenv();
 const app = express();
 // importing file
 import listingController from "./controllers/listingController.js";
@@ -21,6 +26,33 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+
+// session creating
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: Date.now() + 7 * 24 * 60 * 1000,
+      httpOnly: true,
+      secure: false,
+      maxAge: 7 * 24 * 60 * 1000,
+    },
+  })
+);
+
+// using connect flash
+
+app.use(connectFlash());
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.errors = req.flash("errors");
+  // console.log(res.locals.success)
+  next();
+});
 
 // calling the importing file
 
