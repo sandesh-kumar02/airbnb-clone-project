@@ -13,8 +13,11 @@ configDotenv();
 const app = express();
 // importing file
 import listingController from "./controllers/listingController.js";
+import userController from "./Routes/userRoutes.js";
 import listingRoutes from "./Routes/listingRoutes.js";
 import { ExpressError } from "./utils/ExpressError.js";
+import passport from "./Config/passport.js";
+import User from "./models/User.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,14 +46,33 @@ app.use(
   })
 );
 
+// app.get("/user", async (req, res) => {
+//   try {
+//     const fakeUser = new User({
+//       email: "sandesh@gmail.com",
+//       username: "sandesh kumar",
+//     });
+
+//     let registerUser = await User.register(fakeUser, "hello world");
+//     res.json(registerUser);
+//   } catch (err) {
+//     res.send(err.message);
+//   }
+// });
+
 // using connect flash
 
 app.use(connectFlash());
 
+// passport implement
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.errors = req.flash("errors");
-  // console.log(res.locals.success)
+  res.locals.currUser = req.user;
   next();
 });
 
@@ -58,6 +80,7 @@ app.use((req, res, next) => {
 
 app.use("/", listingController);
 app.use("/", listingRoutes);
+app.use("/", userController);
 // end
 
 // Agar koi bhi route match nahi hua

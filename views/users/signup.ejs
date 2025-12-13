@@ -1,0 +1,100 @@
+<% layout('layouts/boilerplate') %>
+
+<style>
+  body {
+    background: linear-gradient(135deg, #1d2b64, #f8cdda);
+    min-height: 100vh;
+  }
+
+  .signup-card {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .error-text {
+    color: #ffb3b3;
+    font-size: 0.85rem;
+    margin-top: 2px;
+  }
+
+  label {
+    color: #fff;
+    font-weight: 500;
+  }
+</style>
+
+<div
+  class="container d-flex justify-content-center align-items-center"
+  style="min-height: 90vh"
+>
+  <div class="col-12 col-md-6 signup-card">
+    <h1 class="mb-4 text-center">Signup on Wonderlust</h1>
+
+    <form
+      class="row g-3 needs-validation"
+      novalidate
+      action="/signup"
+      method="POST"
+    >
+      <!-- Username -->
+      <div class="mb-2">
+        <label for="validationCustom01" class="form-label">Username:</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control <% if (errors?.username) { %>is-invalid<% } %>"
+          id="validationCustom01"
+          required
+          value="<%= oldData?.username || '' %>"
+          placeholder="Enter your username"
+        />
+        <% if (errors?.username) { %>
+        <p class="error-text"><%= errors.username %></p>
+        <% } %>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-2">
+        <label for="validationCustom02" class="form-label">Email:</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control <% if (errors?.email) { %>is-invalid<% } %>"
+          id="validationCustom02"
+          required
+          value="<%= oldData?.email || '' %>"
+          placeholder="Enter your email"
+        />
+        <% if (errors?.email) { %>
+        <p class="error-text"><%= errors.email %></p>
+        <% } %>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-2">
+        <label for="password" class="form-label">Password:</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control <% if (errors?.password) { %>is-invalid<% } %>"
+          id="password"
+          required
+          placeholder="Enter your password"
+        />
+        <% if (errors?.password) { %>
+        <p class="error-text"><%= errors.password %></p>
+        <% } %>
+      </div>
+
+      <div class="col-12 text-center mt-3">
+        <button class="btn btn-light px-5 py-2 fw-bold" type="submit">
+          Signup
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

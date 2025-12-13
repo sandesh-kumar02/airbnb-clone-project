@@ -15,6 +15,7 @@
       <!-- Card body -->
       <div class="card-body">
         <h3 class="card-title mb-3"><%= showListing.title %></h3>
+        <i>Owned By <%= showListing.owner.username %></i>
         <p class="card-text text-muted"><%= showListing.description %></p>
         <p class="card-text fw-bold">
           &#8377; <%= showListing.price.toLocaleString('en-IN') %> / night
@@ -26,6 +27,8 @@
       </div>
 
       <!-- Card footer -->
+      <% if (currUser && showListing.owner._id.equals(currUser._id)) {%>
+
       <div class="card-footer d-flex justify-content-between">
         <a href="/listings/<%= showListing._id %>/edit" class="btn btn-warning"
           >✏️ Edit</a
@@ -37,13 +40,16 @@
           <button class="btn btn-danger">🗑 Delete</button>
         </form>
       </div>
+      <% } %>
     </div>
   </div>
 </div>
 
 <!-- Reviews Section -->
+
 <div class="mt-5">
   <hr />
+  <% if (currUser) {%>
   <h4 class="mb-4">Leave a Review</h4>
   <form
     action="/listing/<%= showListing._id %>/reviews"
@@ -84,7 +90,7 @@
       </button>
     </div>
   </form>
-
+  <% } %>
   <hr />
   <h4 class="mb-4">Show Reviews</h4>
   <div class="list-group">
@@ -94,6 +100,7 @@
     <div
       class="list-group-item list-group-item-action shadow-sm mb-3 rounded-3"
     >
+    <h5>@<%= review.author.username %></h5>
       <div class="d-flex justify-content-between align-items-center mb-2">
         <span class="fw-semibold">⭐ Rating: <%= review.rating %>/5</span>
         <small class="text-muted"

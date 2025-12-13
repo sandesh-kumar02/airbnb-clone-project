@@ -13,7 +13,15 @@ export const allListings = wrapAsync(async (req, res) => {
 export const showListings = wrapAsync(async (req, res) => {
   const { id } = req.params;
 
-  let showListing = await Listing.findById(id).populate("reviews");
+  let showListing = await Listing.findById(id)
+    .populate({
+      path: "reviews",
+      populate: {
+        path: "author",
+      },
+    })
+    .populate("owner");
+  console.log(showListing);
   if (!showListing) {
     req.flash("errors", "Listing you requested for does not exist");
     return res.redirect("/listings");
@@ -33,8 +41,10 @@ export const AddListing = wrapAsync(async (req, res) => {
     price: Number(price),
     country: country,
     location: location,
+    owner: req.user._id,
   });
   await newListings.save();
+  newListings.owner = req.user._id;
   req.flash("success", "new Listing created");
   res.redirect("/listings");
 });
@@ -52,6 +62,7 @@ export const EditListings = wrapAsync(async (req, res) => {
 export const updateListing = wrapAsync(async (req, res) => {
   const { title, description, price, location, country } = req.body.listing;
   const { id } = req.params;
+  let listing = await Listing.findById(id);
   const result = await Listing.findByIdAndUpdate(
     id,
     {
@@ -81,6 +92,8 @@ export const reviewRoute = wrapAsync(async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
   let newReviews = new Review(req.body.review);
+  newReviews.author = req.user._id;
+  console.log(newReviews);
   await newReviews.save();
   listing.reviews.push(newReviews);
   await listing.save();

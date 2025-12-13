@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const reviewSchema = new mongoose.Schema(
   {
@@ -10,7 +10,12 @@ const reviewSchema = new mongoose.Schema(
       min: 1,
       max: 5,
     },
+    author : {
+      type :Schema.Types.ObjectId,
+      ref : "User"
+  }
   },
+  
   { timestamps: true }
 );
 

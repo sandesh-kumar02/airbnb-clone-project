@@ -30,3 +30,160 @@ I’m sharing my daily progress here and on LinkedIn.
   - Used **connect-flash** with Express.js
   - Displayed success messages on listing creation, update, and deletion
   - Displayed error messages on failed operations or form validation errors
+
+# Airbnb Clone – Day 8 Update 🚀
+
+## 📌 Project Overview
+
+This is a **full‑stack Airbnb Clone** built using the **MERN‑style backend stack (Node.js, Express, MongoDB)** with **EJS** for server‑side rendering.
+
+Till **Day 8**, the main focus was implementing **Authentication & Authorization** features securely and in a structured way.
+
+---
+
+## ✅ Day 8 – What Was Implemented
+
+### 🔐 Authentication
+
+- User **Signup** with validation
+- User **Login** using Passport.js (Local Strategy)
+- Password hashing using **passport-local-mongoose**
+- Persistent login using **sessions**
+- Logout functionality
+
+### 🛡 Authorization
+
+- Route protection using custom middleware
+- Only **logged‑in users** can:
+
+  - Create listings
+  - Add reviews
+
+- Only the **owner of a listing** can:
+
+  - Edit listing
+  - Delete listing
+
+---
+
+## 🧩 Tech Stack
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- Passport.js
+- Express‑Session
+- Connect‑Flash
+
+### Frontend
+
+- EJS (Embedded JavaScript Templates)
+- CSS
+- Bootstrap
+
+### Validation & Security
+
+- Joi (schema validation)
+- Passport‑Local‑Mongoose
+- Custom middleware
+
+---
+
+## 📂 Project Structure (Relevant to Day 8)
+
+```
+├── Config/
+│   └── passport.js
+├── Routes/
+│   ├── listingRoutes.js
+│   └── userRoutes.js
+├── controllers/
+│   ├── listingController.js
+│   └── userController.js
+├── middlewares/
+│   ├── isOwner.js
+│   └── validateRequest.js
+├── Validations/
+│   └── signupSchema.js
+├── models/
+│   ├── User.js
+│   ├── listings.js
+│   └── reviews.js
+├── views/
+│   └── users/
+│       ├── login.ejs
+│       └── signup.ejs
+└── server.js
+```
+
+---
+
+## 🧠 Key Concepts Used
+
+- Passport Local Strategy
+- Authentication vs Authorization
+- Middleware chaining in Express
+- Flash messages for error & success feedback
+- MVC folder structure
+- Joi schema validation
+
+---
+
+## 🧪 Authentication Flow
+
+1. User signs up → data validated using Joi
+2. Password hashed & stored securely
+3. User logs in via Passport
+4. Session created & maintained
+5. Protected routes check login status
+6. Ownership middleware checks resource owner
+
+---
+
+## ⚠ Important Middleware
+
+- **isLoggedIn** – restricts unauthenticated access
+- **isOwner** – restricts listing edit/delete
+- **validateRequest** – validates incoming data
+
+---
+
+## 📝 How to Run the Project
+
+```bash
+npm install
+npm start
+```
+
+Make sure MongoDB is running locally or connected via Atlas.
+
+---
+
+## 📅 Progress Log
+
+- **Day 1–5**: Listings CRUD
+- **Day 6**: Reviews system
+- **Day 7**: Flash messages & refactoring
+- **Day 8**: Authentication & Authorization ✅
+
+---
+
+## 🚧 Upcoming Features
+
+- Image upload (Cloudinary)
+- User profile page
+- Default user avatar
+- Advanced authorization rules
+
+---
+
+## 👨‍💻 Author
+
+**Sandesh Kumar**
+Aspiring Full‑Stack Developer
+
+---
+
+⭐ If you like this project, don’t forget to star the repository!
