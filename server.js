@@ -12,12 +12,12 @@ import connectFlash from "connect-flash";
 configDotenv();
 const app = express();
 // importing file
-import listingController from "./controllers/listingController.js";
-import userController from "./Routes/userRoutes.js";
+import userRoutes from "./Routes/userRoutes.js";
+// import { reviewRoute } from "./controllers/reviewController.js";
+import reviewRoutes from "./Routes/reviewRoutes.js";
 import listingRoutes from "./Routes/listingRoutes.js";
 import { ExpressError } from "./utils/ExpressError.js";
 import passport from "./Config/passport.js";
-import User from "./models/User.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -78,9 +78,10 @@ app.use((req, res, next) => {
 
 // calling the importing file
 
-app.use("/", listingController);
+// app.use("/", listingController);
 app.use("/", listingRoutes);
-app.use("/", userController);
+app.use("/", userRoutes);
+app.use("/", reviewRoutes);
 // end
 
 // Agar koi bhi route match nahi hua

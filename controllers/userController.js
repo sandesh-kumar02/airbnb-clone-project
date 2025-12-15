@@ -6,7 +6,7 @@ export const signupUser = (req, res) => {
   res.render("users/signup", { errors: {}, oldData: {} });
 };
 
-export const registerUser = wrapAsync(async (req, res) => {
+export const registerUser = async (req, res) => {
   try {
     const { username, password, email } = req.body;
     const newUser = new User({
@@ -26,7 +26,7 @@ export const registerUser = wrapAsync(async (req, res) => {
     req.flash("errors", error.message);
     res.redirect("/signup");
   }
-});
+};
 
 // Login Functionality
 

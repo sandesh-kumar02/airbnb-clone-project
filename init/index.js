@@ -14,10 +14,6 @@ connectDB()
   });
 
 const initDB = async (req, res) => {
-  initdata.data = initdata.data.map((obj) => ({
-    ...obj,
-    owner: new mongoose.Types.ObjectId("693c20cc1fcf3d53062f0cf7"),
-  }));
   await Listing.insertMany(initdata.data);
   console.log("data was initialized");
 };

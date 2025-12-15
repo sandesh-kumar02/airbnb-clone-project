@@ -187,3 +187,103 @@ Aspiring Full‑Stack Developer
 ---
 
 ⭐ If you like this project, don’t forget to star the repository!
+
+# Day 9 – Project Progress (Airbnb Clone)
+
+## 📅 Day 9 Overview
+
+Today’s focus was on improving the **listing experience** by integrating **image uploads using Cloudinary** and planning the **map functionality** for listing locations.
+
+This day mainly strengthened the backend–frontend connection and prepared the project for real-world features.
+
+---
+
+## ✅ Work Completed
+
+### 1️⃣ Cloudinary Image Upload Integration
+
+- Integrated **Cloudinary** as a third‑party image hosting service.
+- Configured Cloudinary using environment variables for security:
+
+  - `CLOUD_NAME`
+  - `CLOUD_API_KEY`
+  - `CLOUD_API_SECRET`
+
+- Used **multer + multer-storage-cloudinary** to handle image uploads.
+- Images are now:
+
+  - Uploaded from the listing form
+  - Stored securely on Cloudinary
+  - Saved in MongoDB as an image URL
+
+📌 Result: Listings now support **real image uploads instead of static links**.
+
+---
+
+### 2️⃣ Database Improvements
+
+- Ensured each listing correctly stores:
+
+  - `owner` (linked with logged-in user)
+  - `image.url` from Cloudinary
+
+- Old incorrect listings were cleared to maintain data consistency.
+- Verified owner–listing relationship using MongoDB ObjectId references.
+
+---
+
+### 3️⃣ Bug Fixes & Stability
+
+- Fixed runtime errors related to:
+
+  - Missing `owner` field in listings
+  - Undefined properties while rendering EJS templates
+
+- Added proper population of referenced fields to avoid rendering issues.
+
+---
+
+## 🗺️ Upcoming Feature (Next Step)
+
+### Map Functionality (In Progress)
+
+- Plan to add **map support for each listing**.
+- Since no credit/debit card is available, the project will use:
+
+  - **Leaflet.js**
+  - **OpenStreetMap** (100% free, no API key required)
+
+- Each listing will display:
+
+  - A map
+  - A marker showing the listing location
+
+📌 This will enhance the user experience and make listings more interactive.
+
+---
+
+## 🛠️ Tech Stack Used Today
+
+- **Node.js / Express.js**
+- **MongoDB & Mongoose**
+- **Cloudinary** (Image Hosting)
+- **Multer** (File Upload Handling)
+- **EJS** (Templating)
+
+## 🎯 Learning Outcome
+
+- Learned how to integrate a third‑party service (Cloudinary) into a full‑stack application.
+- Understood the importance of data consistency and schema validation.
+- Planned cost‑free alternatives for production‑like features (maps without billing).
+
+---
+
+## ⏭️ Next Goals (Day 10)
+
+- Add Leaflet + OpenStreetMap map to listing show page
+- Store latitude & longitude for listings
+- Improve UI/UX of listing detail page
+
+---
+
+📌 _This project is being built step‑by‑step as part of a full‑stack learning journey._

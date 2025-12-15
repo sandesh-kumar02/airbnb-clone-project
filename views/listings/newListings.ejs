@@ -2,8 +2,13 @@
 <body class="add-listing-page">
   <div class="container py-5">
     <h1 class="text-center mb-5 form-title">✨ Add New Listing</h1>
-    <form action="/listings" method="POST" class="needs-validation" novalidate>
-      
+    <form
+      action="/listings"
+      method="POST"
+      class="needs-validation"
+      novalidate
+      enctype="multipart/form-data"
+    >
       <!-- Title -->
       <div class="mb-4">
         <label for="title" class="form-label fw-bold">Title</label>
@@ -32,6 +37,11 @@
         ></textarea>
         <div class="invalid-feedback">⚠️ Please enter a description.</div>
         <div class="valid-feedback">✅ Perfect!</div>
+      </div>
+      <!--  image -->
+      <div class="mb-4">
+        <label for="image" class="form-label fw-bold">Upload Image</label>
+        <input type="file" name="listing[image]" class="form-control">
       </div>
 
       <!-- Price -->

@@ -1,16 +1,14 @@
 import express from "express";
 import Listing from "../models/listings.js";
 import { wrapAsync } from "../utils/WrapAsync.js";
-
-import Review from "../models/reviews.js";
 const router = express.Router();
 
-export const allListings = wrapAsync(async (req, res) => {
+export const allListings = async (req, res) => {
   let alllistings = await Listing.find({});
   res.render("listings/index.ejs", { alllistings });
-});
+};
 
-export const showListings = wrapAsync(async (req, res) => {
+export const showListings = async (req, res) => {
   const { id } = req.params;
 
   let showListing = await Listing.findById(id)
@@ -27,27 +25,33 @@ export const showListings = wrapAsync(async (req, res) => {
     return res.redirect("/listings");
   }
   res.render("listings/show.ejs", { showListing });
-});
+};
 
 export const newListings = (req, res) => {
   res.render("listings/newListings.ejs");
 };
 
-export const AddListing = wrapAsync(async (req, res) => {
-  const { title, description, price, country, location } = req.body.listing;
+export const AddListing = async (req, res) => {
+  let url = req.file.path;
+  let fileName = req.file.filename;
+  console.log(url, "...", fileName);
+  const { title, description, price, country, location, image } =
+    req.body.listing;
   const newListings = new Listing({
     title: title,
     description: description,
     price: Number(price),
     country: country,
     location: location,
+    image: { url: image },
     owner: req.user._id,
   });
+  newListings.image = { url, fileName };
   await newListings.save();
   newListings.owner = req.user._id;
   req.flash("success", "new Listing created");
   res.redirect("/listings");
-});
+};
 
 export const EditListings = wrapAsync(async (req, res) => {
   const { id } = req.params;
@@ -56,10 +60,12 @@ export const EditListings = wrapAsync(async (req, res) => {
     req.flash("errors", "Listing you requested for does not exist");
     return res.redirect("/listings");
   }
-  res.render("listings/edit.ejs", { listings });
+  let originalImageUrl = listings.image.url;
+  originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_250");
+  res.render("listings/edit.ejs", { listings, originalImageUrl });
 });
 
-export const updateListing = wrapAsync(async (req, res) => {
+export const updateListing = async (req, res) => {
   const { title, description, price, location, country } = req.body.listing;
   const { id } = req.params;
   let listing = await Listing.findById(id);
@@ -74,43 +80,23 @@ export const updateListing = wrapAsync(async (req, res) => {
     },
     { new: true }
   );
+  //lskgf
+  if (typeof req.file !== "undefined") {
+    let url = req.file.path;
+    let fileName = req.file.filename;
+    listing.image = { url, fileName };
+    await listing.save();
+  }
   req.flash("success", "Listing Updated!");
   res.redirect(`/listings/${id}`);
-});
+};
 
-export const deleteListing = wrapAsync(async (req, res) => {
+export const deleteListing = async (req, res) => {
   const { id } = req.params;
   const result = await Listing.findByIdAndDelete(id, { new: true });
   console.log(result);
   req.flash("success", "Listing Deleted");
   res.redirect(`/listings`);
-});
+};
 
-// post route
-
-export const reviewRoute = wrapAsync(async (req, res) => {
-  const { id } = req.params;
-  const listing = await Listing.findById(id);
-  let newReviews = new Review(req.body.review);
-  newReviews.author = req.user._id;
-  console.log(newReviews);
-  await newReviews.save();
-  listing.reviews.push(newReviews);
-  await listing.save();
-  req.flash("success", "new Review Created");
-  console.log("new review saved");
-  res.redirect(`/listings/${listing._id}`);
-});
-
-// delete routr
-export const deleteComment = wrapAsync(async (req, res) => {
-  let { id, reviewId } = req.params;
-  const listing = await Listing.findByIdAndUpdate(id, {
-    $pull: { reviews: reviewId },
-  });
-  const deletedReview = await Review.findByIdAndDelete(reviewId);
-  req.flash("success", "Review Deleted!");
-  console.log("Deleted Review:", deletedReview);
-  res.redirect(`/listings/${id}`);
-});
 export default router;

@@ -10,6 +10,7 @@
       method="POST"
       class="needs-validation"
       novalidate
+      enctype="multipart/form-data"
     >
       <!-- Title -->
       <div class="mb-3">
@@ -36,6 +37,16 @@
 <%= listings.description %></textarea
         >
         <div class="invalid-feedback">⚠️ Description is required.</div>
+      </div>
+      <!-- image url -->
+      <div class="mb-3">
+        original Listing Image <br />
+        <img src="<%= originalImageUrl %>" alt="image url" />
+      </div>
+      <!-- image -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Price</label>
+        <input type="file" name="listing[image]" class="form-control" />
       </div>
 
       <!-- Price -->
