@@ -1,6 +1,7 @@
 import express from "express";
 import Listing from "../models/listings.js";
 import { wrapAsync } from "../utils/WrapAsync.js";
+import geoCode from "../utils/geoCode.js";
 const router = express.Router();
 
 export const allListings = async (req, res) => {
@@ -37,12 +38,20 @@ export const AddListing = async (req, res) => {
   console.log(url, "...", fileName);
   const { title, description, price, country, location, image } =
     req.body.listing;
+
+  // 🔥 GEO CODING HERE
+  const coordinates = await geoCode(location); // [lng, lat]
+
   const newListings = new Listing({
     title: title,
     description: description,
     price: Number(price),
     country: country,
     location: location,
+    geometry: {
+      type: "Point",
+      coordinates: coordinates,
+    },
     image: { url: image },
     owner: req.user._id,
   });
@@ -69,6 +78,7 @@ export const updateListing = async (req, res) => {
   const { title, description, price, location, country } = req.body.listing;
   const { id } = req.params;
   let listing = await Listing.findById(id);
+  const coordinates = await geoCode(location);
   const result = await Listing.findByIdAndUpdate(
     id,
     {
@@ -77,6 +87,10 @@ export const updateListing = async (req, res) => {
       price,
       location,
       country,
+      geometry: {
+        type: "Point",
+        coordinates,
+      },
     },
     { new: true }
   );

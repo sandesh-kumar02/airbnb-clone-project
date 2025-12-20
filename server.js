@@ -46,19 +46,11 @@ app.use(
   })
 );
 
-// app.get("/user", async (req, res) => {
-//   try {
-//     const fakeUser = new User({
-//       email: "sandesh@gmail.com",
-//       username: "sandesh kumar",
-//     });
-
-//     let registerUser = await User.register(fakeUser, "hello world");
-//     res.json(registerUser);
-//   } catch (err) {
-//     res.send(err.message);
-//   }
-// });
+// Leaflet static files
+app.use(
+  "/leaflet",
+  express.static(path.join(process.cwd(), "node_modules/leaflet/dist"))
+);
 
 // using connect flash
 

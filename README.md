@@ -287,3 +287,64 @@ This day mainly strengthened the backend–frontend connection and prepared the 
 ---
 
 📌 _This project is being built step‑by‑step as part of a full‑stack learning journey._
+
+## Day 9 – Map Integration with Leaflet.js 🌍
+
+### 🚀 What I implemented
+
+- Integrated **Leaflet.js** to display an interactive map on the listing details page.
+- Displayed listing location using a **marker** on the map.
+- Used **OpenStreetMap tiles** (no paid service, no card required).
+- Implemented **geocoding using OpenStreetMap Nominatim API** to convert location text into latitude & longitude.
+- Successfully tested map rendering without saving coordinates to the database (test mode).
+
+---
+
+### 🛠️ Tech Stack Used
+
+- **Leaflet.js**
+- **OpenStreetMap**
+- **Nominatim Geocoding API**
+- **Node.js**
+- **Express.js**
+- **EJS**
+- **Cloudinary (for images)**
+
+---
+
+### 🧠 How it works
+
+1. User enters a location while creating a listing.
+2. Location text is sent to **Nominatim API**.
+3. API returns latitude & longitude.
+4. Coordinates are passed to `show.ejs`.
+5. Leaflet map renders with a marker at the given location.
+
+---
+
+### 📌 Features
+
+- Dynamic map rendering per listing
+- Marker popup showing listing location
+- Lightweight & free alternative to Mapbox
+- No billing or card details required
+
+---
+
+### 🔮 Future Improvements
+
+- Save coordinates in the database
+- Add draggable marker for editing location
+- Auto-update location on marker drag
+- Cluster maps for multiple listings
+
+---
+
+### 📸 Preview
+
+_Map is displayed on the listing details page showing the exact location._
+
+---
+
+✅ **Status:** Completed & Tested  
+📅 **Day:** 9

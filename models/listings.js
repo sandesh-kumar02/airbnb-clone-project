@@ -10,8 +10,8 @@ const listingSchema = new mongoose.Schema({
     type: String,
   },
   image: {
-    url : String,
-    filename : String,
+    url: String,
+    filename: String,
   },
   price: {
     type: Number,
@@ -34,6 +34,18 @@ const listingSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  // GeoJSON
+  geometry: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+    },
+    coordinates: {
+      type: [Number], // [lng, lat]
+      required: true,
+    },
+  },
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
@@ -41,6 +53,9 @@ listingSchema.post("findOneAndDelete", async (listing) => {
     await Review.deleteMany({ _id: { $in: listing.reviews } });
   }
 });
+
+// 🔥 Geo queries ke liye mandatory
+listingSchema.index({ geometry: "2dsphere" });
 
 const Listing = mongoose.model("Listing", listingSchema);
 

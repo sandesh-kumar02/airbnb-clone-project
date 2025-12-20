@@ -4,11 +4,21 @@
   <div class="container-fluid">
     <a
       class="navbar-brand d-flex align-items-center fw-bold text-primary"
-      href="/"
+      href="/listings"
     >
       <i class="fa-solid fa-compass me-2"></i> MyAirbnb
     </a>
-
+    <div class="container border-2 border-danger m-auto w-50">
+      <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
     <!-- Toggle button (for small screens) -->
     <button
       class="navbar-toggler"
@@ -26,17 +36,14 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/listings">All Listings</a>
+          <a class="nav-link" href="/listings">Explore</a>
         </li>
         <li class="nav-item">
           <a
             class="nav-link btn btn-primary text-white px-3 ms-2"
             href="/listing/new"
           >
-            <i class="fa-solid fa-plus me-1"></i> Add Listing
+            <i class="fa-solid fa-plus me-1"></i> Airbnb your home
           </a>
         </li>
         <!-- kjdsfyuiwej -->
