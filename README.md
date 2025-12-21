@@ -348,3 +348,60 @@ _Map is displayed on the listing details page showing the exact location._
 
 ✅ **Status:** Completed & Tested  
 📅 **Day:** 9
+
+# 🏡 WanderLust – Airbnb Clone (Full Stack Project)
+
+A full-stack Airbnb-style web application built using **Node.js, Express, MongoDB, and EJS**, focused on learning real-world backend concepts, authentication, image uploads, and map integration.
+
+---
+
+## 🚀 Features
+
+- User authentication (Signup / Login)
+- Create, edit, and delete property listings
+- Image upload with Cloudinary
+- Reviews & ratings system
+- Interactive map with location display
+- Secure sessions & flash messages
+- MongoDB Atlas cloud database integration
+
+---
+
+## 🛠 Tech Stack
+
+**Frontend**
+
+- EJS
+- Bootstrap
+- CSS
+
+**Backend**
+
+- Node.js
+- Express.js
+- MongoDB (Atlas)
+- Mongoose
+- Passport.js
+
+**Other Tools**
+
+- Cloudinary (image storage)
+- Map integration
+- Git & GitHub
+
+---
+
+## 📅 Project Progress Log
+
+### ✅ Day 10 – MongoDB Atlas & Map Bug Fix
+
+- Connected application to **MongoDB Atlas (cloud database)**
+- Configured environment variables securely
+- Fixed map rendering and location bugs
+- Improved overall app stability
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env` file and add:

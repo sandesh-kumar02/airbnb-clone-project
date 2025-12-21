@@ -6,6 +6,10 @@ import { fileURLToPath } from "url";
 import engine from "ejs-mate";
 import methodOverride from "method-override";
 import session from "express-session";
+import connectMongo, {
+  createWebCryptoAdapter,
+  MongoStore,
+} from "connect-mongo";
 import { configDotenv } from "dotenv";
 import connectFlash from "connect-flash";
 
@@ -30,10 +34,23 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
+const store = MongoStore.create({
+  mongoUrl: process.env.MONGO_URL,
+  cryptoAdapter: createWebCryptoAdapter({
+    secret: process.env.MY_SECRET_KEY,
+  }),
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", () => {
+  console.log("ERROR in mongo SESSION STORE", ERR);
+});
+
 // session creating
 
 app.use(
   session({
+    store: store,
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
@@ -93,7 +110,7 @@ app.use((err, req, res, next) => {
 });
 
 async function connectDB() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust-Project");
+  await mongoose.connect(process.env.MONGO_URL);
 }
 connectDB()
   .then(() => {
